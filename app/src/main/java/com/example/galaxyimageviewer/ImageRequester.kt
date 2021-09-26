@@ -33,12 +33,15 @@ class ImageRequester(listeningActivity: Activity) {
     fun getPhoto() {
 
         val date = dateFormat.format(calendar.time)
-
+        val startdate = "2021-09-10"
+        val enddate = "2021-09-20"
         val urlRequest = Builder().scheme(URL_SCHEME)
             .authority(URL_AUTHORITY)
             .appendPath(URL_PATH_1)
             .appendPath(URL_PATH_2)
-            .appendQueryParameter(URL_QUERY_PARAM_DATE_KEY, date)
+            //.appendQueryParameter(URL_QUERY_PARAM_DATE_KEY, date)
+            .appendQueryParameter(URL_QUERY_PARAM_START_DATE_KEY, startdate)
+            .appendQueryParameter(URL_QUERY_PARAM_END_DATE_KEY, enddate)
             .appendQueryParameter(URL_QUERY_PARAM_API_KEY, context.getString(R.string.api_key))
             .build().toString()
 
@@ -82,6 +85,8 @@ class ImageRequester(listeningActivity: Activity) {
         private val URL_PATH_1 = "planetary"
         private val URL_PATH_2 = "apod"
         private val URL_QUERY_PARAM_DATE_KEY = "date"
+        private val URL_QUERY_PARAM_START_DATE_KEY = "start_date"
+        private val URL_QUERY_PARAM_END_DATE_KEY = "end_date"
         private val URL_QUERY_PARAM_API_KEY = "api_key"
     }
 }
