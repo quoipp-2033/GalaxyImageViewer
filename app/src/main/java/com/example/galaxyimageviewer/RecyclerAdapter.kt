@@ -30,7 +30,15 @@ class RecyclerAdapter(private val photos: ArrayList<Photo>) : RecyclerView.Adapt
             this.photo = photo
             Picasso.with(view.context).load(photo.url).into(view.itemImage)
             view.itemDate.text = photo.humanDate
-            view.itemDescription.text = photo.explanation
+            //view.itemDescription.text = photo.explanation
+            //<TextView
+            //        android:id="@+id/itemDescription"
+            //        android:layout_width="wrap_content"
+            //        android:layout_height="wrap_content"
+            //        android:layout_gravity="center|start"
+            //        android:layout_weight="1"
+            //        android:ellipsize="end"
+            //        android:maxLines="5" />
         }
 
         companion object {

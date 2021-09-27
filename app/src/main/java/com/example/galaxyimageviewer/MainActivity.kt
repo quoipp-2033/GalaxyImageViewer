@@ -7,6 +7,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.IOException
 import java.util.ArrayList
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
+
+
+
 
 class MainActivity : AppCompatActivity(), ImageRequester.ImageRequesterResponse {
 
@@ -24,7 +28,8 @@ class MainActivity : AppCompatActivity(), ImageRequester.ImageRequesterResponse 
         setContentView(R.layout.activity_main)
         adapter = RecyclerAdapter(photosList)
         recyclerView.adapter = adapter
-
+        val staggeredGridLayoutManager = StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL)
+        recyclerView.layoutManager = staggeredGridLayoutManager
         imageRequester = ImageRequester(this)
     }
 

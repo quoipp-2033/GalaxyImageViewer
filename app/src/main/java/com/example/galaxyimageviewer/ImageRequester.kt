@@ -34,8 +34,8 @@ class ImageRequester(listeningActivity: Activity) {
     fun getPhoto() {
 
         val date = dateFormat.format(calendar.time)
-        val startdate = "2021-09-10"
-        val enddate = "2021-09-20"
+        val startdate = "2021-09-01"
+        val enddate = "2021-09-27"
         val urlRequest = Builder().scheme(URL_SCHEME)
             .authority(URL_AUTHORITY)
             .appendPath(URL_PATH_1)
@@ -56,7 +56,6 @@ class ImageRequester(listeningActivity: Activity) {
             }
 
             override fun onResponse(call: Call, response: Response) {
-
                 try {
                     val i=0;
                     val photoJSON = JSONArray(response.body()?.string() ?: "")
@@ -68,16 +67,12 @@ class ImageRequester(listeningActivity: Activity) {
                             val receivedPhoto = Photo(photoJSON.getJSONObject(i))
                             responseListener.receivedNewPhoto(receivedPhoto)
                             isLoadingData = false
-                        } else {
-                            getPhoto()
                         }
                     }
-
                 } catch (e: JSONException) {
                     isLoadingData = false
                     e.printStackTrace()
                 }
-
             }
         })
     }
