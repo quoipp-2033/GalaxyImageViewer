@@ -11,7 +11,6 @@ import java.util.ArrayList
 class MainActivity : AppCompatActivity(), ImageRequester.ImageRequesterResponse {
 
     private lateinit var adapter: RecyclerAdapter
-    private lateinit var linearLayoutManager: LinearLayoutManager
     private var photosList: ArrayList<Photo> = ArrayList()
     private lateinit var imageRequester: ImageRequester
 
@@ -25,8 +24,6 @@ class MainActivity : AppCompatActivity(), ImageRequester.ImageRequesterResponse 
         setContentView(R.layout.activity_main)
         adapter = RecyclerAdapter(photosList)
         recyclerView.adapter = adapter
-        linearLayoutManager = LinearLayoutManager(this)
-        recyclerView.layoutManager = linearLayoutManager
 
         imageRequester = ImageRequester(this)
     }

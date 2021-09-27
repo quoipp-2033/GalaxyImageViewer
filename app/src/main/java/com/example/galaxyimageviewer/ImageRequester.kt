@@ -9,6 +9,7 @@ import org.json.JSONObject
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
+import org.json.JSONArray
 
 class ImageRequester(listeningActivity: Activity) {
 
@@ -57,17 +58,21 @@ class ImageRequester(listeningActivity: Activity) {
             override fun onResponse(call: Call, response: Response) {
 
                 try {
-                    val photoJSON = JSONObject(response.body()!!.string())
+                    val i=0;
+                    val photoJSON = JSONArray(response.body()?.string() ?: "")
 
                     calendar.add(Calendar.DAY_OF_YEAR, -1)
 
-                    if (photoJSON.getString(MEDIA_TYPE_KEY) != MEDIA_TYPE_VIDEO_VALUE) {
-                        val receivedPhoto = Photo(photoJSON)
-                        responseListener.receivedNewPhoto(receivedPhoto)
-                        isLoadingData = false
-                    } else {
-                        getPhoto()
+                    for(i in 0 until photoJSON.length()){
+                        if (photoJSON.getJSONObject(i).getString(MEDIA_TYPE_KEY) != MEDIA_TYPE_VIDEO_VALUE) {
+                            val receivedPhoto = Photo(photoJSON.getJSONObject(i))
+                            responseListener.receivedNewPhoto(receivedPhoto)
+                            isLoadingData = false
+                        } else {
+                            getPhoto()
+                        }
                     }
+
                 } catch (e: JSONException) {
                     isLoadingData = false
                     e.printStackTrace()
